@@ -40,7 +40,7 @@ window.Pitta = window.Pitta || {};
   }
 
   ns.animate = function (t) {
-    currentX = lerp(currentX, targetX, 0.07);
+    currentX = lerp(currentX, targetX, 0.15);
     track.style.transform = `translateX(${-currentX}px)`;
 
     ns.drawStars(t * 0.001);
