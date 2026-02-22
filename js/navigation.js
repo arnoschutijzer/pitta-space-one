@@ -13,12 +13,14 @@
   let touchStartX = 0;
   let touchStartY = 0;
   let touchLastX  = 0;
+  let touchLastY  = 0;
   let touchLocked = null;
 
   window.addEventListener('touchstart', e => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
     touchLastX  = touchStartX;
+    touchLastY  = touchStartY;
     touchLocked = null;
   }, { passive: false });
 
@@ -38,11 +40,12 @@
       const delta = touchLastX - e.touches[0].clientX;
       ns.applyDelta(delta);
     } else if (touchLocked === 'v') {
-      const delta = (touchStartY - e.touches[0].clientY) * 1.5;
-      ns.applyDelta(delta / 80);
+      const delta = touchLastY - e.touches[0].clientY;
+      ns.applyDelta(delta * 1.5);
     }
 
     touchLastX = e.touches[0].clientX;
+    touchLastY = e.touches[0].clientY;
   }, { passive: false });
 
   window.addEventListener('touchend', () => {
